@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Recipe } from '@/lib/types';
 import { Clock, Users, ChefHat, Heart, Star } from 'lucide-react';
 import { api } from '@/lib/api';
+import RecipeShare from './RecipeShare';
 
 interface RecipeDisplayProps {
   recipe: Recipe;
@@ -40,18 +41,21 @@ export default function RecipeDisplay({ recipe, showActions = true }: RecipeDisp
             )}
           </div>
           {showActions && (
-            <button
-              onClick={handleToggleFavorite}
-              disabled={isTogglingFavorite}
-              className={`p-3 rounded-full transition-colors ${
-                isFavorited
-                  ? 'bg-red-100 text-red-600 hover:bg-red-200'
-                  : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
-              }`}
-              title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
-            >
-              <Heart className={`w-6 h-6 ${isFavorited ? 'fill-current' : ''}`} />
-            </button>
+            <div className="flex gap-2 ml-4">
+              <RecipeShare recipe={recipe} />
+              <button
+                onClick={handleToggleFavorite}
+                disabled={isTogglingFavorite}
+                className={`p-3 rounded-full transition-colors ${
+                  isFavorited
+                    ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                    : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                }`}
+                title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                <Heart className={`w-6 h-6 ${isFavorited ? 'fill-current' : ''}`} />
+              </button>
+            </div>
           )}
         </div>
 

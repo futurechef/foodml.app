@@ -70,6 +70,23 @@ async def get_recipe(
     return recipe
 
 
+@router.get("/public/{recipe_id}", response_model=RecipeResponse)
+async def get_public_recipe(
+    recipe_id: int,
+    db: AsyncSession = Depends(get_db)
+):
+    """Get a specific recipe by ID (public view, no authentication required)."""
+    recipe = await RecipeService.get_recipe_by_id(db, recipe_id)
+
+    if not recipe:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Recipe not found"
+        )
+
+    return recipe
+
+
 @router.get("/", response_model=RecipeListResponse)
 async def get_my_recipes(
     page: int = Query(1, ge=1),
