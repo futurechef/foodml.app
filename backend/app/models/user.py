@@ -18,3 +18,4 @@ class User(Base):
     recipes = relationship("Recipe", back_populates="user", cascade="all, delete-orphan")
     verifications = relationship("Verification", back_populates="user", cascade="all, delete-orphan")
     favorites = relationship("Favorite", back_populates="user", cascade="all, delete-orphan")
+    collections = relationship("Collection", back_populates="user", cascade="all, delete-orphan")

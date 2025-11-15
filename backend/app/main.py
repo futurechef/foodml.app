@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from app.config import get_settings
 from app.database import init_db
-from app.routers import auth, recipes, verifications
+from app.routers import auth, recipes, verifications, collections
 
 # Configure logging
 logging.basicConfig(
@@ -47,6 +47,7 @@ app.add_middleware(
 app.include_router(auth.router, prefix=settings.API_V1_PREFIX)
 app.include_router(recipes.router, prefix=settings.API_V1_PREFIX)
 app.include_router(verifications.router, prefix=settings.API_V1_PREFIX)
+app.include_router(collections.router, prefix=settings.API_V1_PREFIX)
 
 
 @app.get("/")

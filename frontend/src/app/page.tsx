@@ -53,6 +53,12 @@ export default function Home() {
                     Trending
                   </button>
                   <button
+                    onClick={() => router.push('/collections')}
+                    className="btn btn-secondary"
+                  >
+                    Collections
+                  </button>
+                  <button
                     onClick={() => router.push('/my-recipes')}
                     className="btn btn-secondary"
                   >

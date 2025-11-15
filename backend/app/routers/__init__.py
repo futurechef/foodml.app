@@ -1,3 +1,3 @@
-from app.routers import auth, recipes, verifications
+from app.routers import auth, recipes, verifications, collections
 
-__all__ = ["auth", "recipes", "verifications"]
+__all__ = ["auth", "recipes", "verifications", "collections"]
