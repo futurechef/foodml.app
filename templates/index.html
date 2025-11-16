@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #38e07b;
+            --secondary-color: #2a9d8f;
+            --background-color: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #4ecdc4;
+        }
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[var(--background-color)]">
+<div class="relative flex size-full min-h-screen flex-col justify-between group/design-root overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 bg-[var(--background-color)] bg-opacity-80 backdrop-blur-sm shadow-sm">
+<div class="flex items-center p-4 justify-between">
+<button class="text-[var(--text-primary)] p-2 rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined">
+                            arrow_back_ios_new
+                        </span>
+</button>
+<h1 class="text-[var(--text-primary)] text-xl font-bold">Recipe Chat</h1>
+<div class="flex items-center gap-2">
+    <button id="login-btn" class="text-[var(--text-primary)] font-bold py-2 px-4 rounded-full hover:bg-white/10">Login</button>
+    <button id="signup-btn" class="bg-[var(--primary-color)] text-[var(--background-color)] font-bold py-2 px-4 rounded-full hover:bg-opacity-90">Sign Up</button>
+</div>
+</div>
+</header>
+<div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-[var(--background-color)] p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold mb-4">Login</h2>
+        <input type="email" placeholder="Email" class="w-full bg-gray-800 border-2 border-gray-700 rounded-full py-3 px-4 mb-4 focus:border-[var(--primary-color)] focus:outline-none">
+        <input type="password" placeholder="Password" class="w-full bg-gray-800 border-2 border-gray-700 rounded-full py-3 px-4 mb-4 focus:border-[var(--primary-color)] focus:outline-none">
+        <button id="login-submit-btn" class="w-full bg-[var(--primary-color)] text-[var(--background-color)] font-bold py-3 rounded-full hover:bg-opacity-90">Login</button>
+        <button id="close-login-modal" class="w-full mt-2 text-center text-sm text-[var(--text-secondary)]">Cancel</button>
+    </div>
+</div>
+<div id="signup-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-[var(--background-color)] p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold mb-4">Sign Up</h2>
+        <input type="email" placeholder="Email" class="w-full bg-gray-800 border-2 border-gray-700 rounded-full py-3 px-4 mb-4 focus:border-[var(--primary-color)] focus:outline-none">
+        <input type="password" placeholder="Password" class="w-full bg-gray-800 border-2 border-gray-700 rounded-full py-3 px-4 mb-4 focus:border-[var(--primary-color)] focus:outline-none">
+        <button class="w-full bg-[var(--primary-color)] text-[var(--background-color)] font-bold py-3 rounded-full hover:bg-opacity-90">Sign Up</button>
+        <button id="close-signup-modal" class="w-full mt-2 text-center text-sm text-[var(--text-secondary)]">Cancel</button>
+    </div>
+</div>
+<main class="p-4 space-y-6">
+</main>
+</div>
+<footer class="sticky bottom-0 bg-[var(--background-color)] pt-2">
+<div class="flex items-center px-4 py-2 gap-2">
+<div class="flex-1 flex items-center bg-[#29382f] rounded-full">
+<input class="form-input w-full bg-transparent border-none text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] focus:ring-0" placeholder="Ask for a recipe..." type="text"/>
+<button class="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+<span class="material-symbols-outlined">
+                            add_photo_alternate
+                        </span>
+</button>
+</div>
+<button id="send-btn" class="p-3 rounded-full bg-[var(--primary-color)] text-[var(--background-color)]">
+<span class="material-symbols-outlined">
+                        send
+                    </span>
+</button>
+</div>
+<div class="flex justify-around border-t border-[#29382f] bg-[#1c2620] py-1">
+<a class="flex flex-col items-center justify-center gap-1 p-2 text-[var(--primary-color)]" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-xs font-medium">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-xs font-medium">Recipes</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="text-xs font-medium">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)]" href="/profile">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium">Profile</span>
+</a>
+</div>
+</footer>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body></html>

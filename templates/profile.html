@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #38e07b;
+            --background-color: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+        }
+        body {
+            font-family: 'Spline Sans', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body class="bg-[var(--background-color)]">
+    <header class="sticky top-0 z-10 bg-[var(--background-color)] bg-opacity-80 backdrop-blur-sm shadow-sm">
+        <div class="flex items-center p-4 justify-between">
+            <a href="/" class="text-[var(--text-primary)] p-2 rounded-full hover:bg-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path></svg>
+            </a>
+            <h1 class="text-[var(--text-primary)] text-xl font-bold">My Recipes</h1>
+            <div class="w-10"></div>
+        </div>
+    </header>
+    <main class="p-4 space-y-6">
+        <div id="recipe-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Saved recipes will be dynamically inserted here -->
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                const response = await fetch('/get_saved_recipes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token })
+                });
+                const data = await response.json();
+                const recipeGrid = document.getElementById('recipe-grid');
+                data.recipes.forEach(recipe => {
+                    const recipeLink = document.createElement('a');
+                    recipeLink.href = `/recipe?id=${recipe.id}`;
+                    recipeLink.className = 'bg-[#29382f] rounded-2xl overflow-hidden shadow-lg block';
+                    recipeLink.innerHTML = `
+                        <div class="bg-center bg-no-repeat aspect-video bg-cover" style='background-image: url("${recipe.image_url}");'></div>
+                        <div class="p-4">
+                            <h3 class="text-white text-lg font-bold">${recipe.name}</h3>
+                            <p class="text-[var(--text-secondary)] text-sm mt-1">${recipe.description}</p>
+                        </div>
+                    `;
+                    recipeGrid.appendChild(recipeLink);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
