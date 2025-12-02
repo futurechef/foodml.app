@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recipe Generator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Recipe Generator</h1>
+        <form id="recipe-form">
+            <label for="ingredients">Enter your ingredients (one per line):</label>
+            <textarea id="ingredients" name="ingredients" rows="5" required></textarea>
+            <button type="submit">Generate Recipe</button>
+        </form>
+        <div id="recipe-result" class="hidden">
+            <h2>Generated Recipe</h2>
+            <div id="recipe-content">
+                <!-- Recipe will be displayed here -->
+            </div>
+            <div class="feedback-section">
+                <h3>Was this recipe helpful?</h3>
+                <button id="thumb-up">&#x1F44D;</button>
+                <button id="thumb-down">&#x1F44E;</button>
+                <textarea id="comment" placeholder="Leave a comment..."></textarea>
+                <button id="submit-feedback">Submit Feedback</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
