@@ -190,7 +190,7 @@ export default function RecipeDisplay({ recipe, showActions = true }: RecipeDisp
       {/* Chef Notes */}
       {recipe.chef_notes && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <h4 className="font-semibold text-gray-900 mb-2">Chef's Notes</h4>
+          <h4 className="font-semibold text-gray-900 mb-2">Chef&apos;s Notes</h4>
           <p className="text-gray-700">{recipe.chef_notes}</p>
         </div>
       )}

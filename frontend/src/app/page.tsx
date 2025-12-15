@@ -142,7 +142,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-semibold mb-2">Verify & Share</h4>
               <p className="text-gray-600">
-                Cook it, rate it, share feedback - help build the world's best AI recipe database
+                Cook it, rate it, share feedback - help build the world&apos;s best AI recipe database
               </p>
             </div>
           </div>

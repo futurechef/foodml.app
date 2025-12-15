@@ -1,26 +1,45 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api';
-import { Recipe, RecipeListResponse } from '@/lib/types';
+import { Recipe } from '@/lib/types';
 import { Search, Loader2, ChefHat } from 'lucide-react';
 import RecipeCard from '@/components/RecipeCard';
 
-export default function SearchPage() {
+function SearchPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
-  const [cuisine, setCuisine] = useState(searchParams.get('cuisine') || '');
-  const [difficulty, setDifficulty] = useState(searchParams.get('difficulty') || '');
-  const [minRating, setMinRating] = useState(searchParams.get('min_rating') ? parseFloat(searchParams.get('min_rating')!) : 0);
+  const initialQuery = useMemo(() => searchParams.get('q') || '', [searchParams]);
+  const initialCuisine = useMemo(() => searchParams.get('cuisine') || '', [searchParams]);
+  const initialDifficulty = useMemo(() => searchParams.get('difficulty') || '', [searchParams]);
+  const initialMinRating = useMemo(() => {
+    const raw = searchParams.get('min_rating');
+    if (!raw) return 0;
+    const parsed = parseFloat(raw);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }, [searchParams]);
+
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const [cuisine, setCuisine] = useState(initialCuisine);
+  const [difficulty, setDifficulty] = useState(initialDifficulty);
+  const [minRating, setMinRating] = useState(initialMinRating);
   
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [pageSize] = useState(12);
+
+  useEffect(() => {
+    setSearchQuery(initialQuery);
+    setCuisine(initialCuisine);
+    setDifficulty(initialDifficulty);
+    setMinRating(initialMinRating);
+    setPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialQuery, initialCuisine, initialDifficulty, initialMinRating]);
 
   useEffect(() => {
     if (searchQuery || cuisine || difficulty || minRating > 0) {
@@ -242,5 +261,21 @@ export default function SearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gray-50 py-8">
+          <div className="container-custom flex justify-center items-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin text-primary-600" />
+          </div>
+        </div>
+      }
+    >
+      <SearchPageInner />
+    </Suspense>
   );
 }
