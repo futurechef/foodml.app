@@ -13,11 +13,30 @@ export default function RecipeShare({ recipe }: RecipeShareProps) {
   const [showMenu, setShowMenu] = useState(false);
 
   const recipeUrl = `${typeof window !== 'undefined' ? window.location.origin : ''}/recipe/${recipe.id}`;
+  const canShare = typeof navigator !== 'undefined' && 'share' in navigator;
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(recipeUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard
+      .writeText(recipeUrl)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {
+        // Best-effort fallback; clipboard permissions can be denied.
+        try {
+          const input = document.createElement('input');
+          input.value = recipeUrl;
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          document.body.removeChild(input);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } catch {
+          // Ignore; user can still manually copy the URL.
+        }
+      });
   };
 
   const generateMarkdown = () => {
@@ -65,16 +84,20 @@ ${recipe.chef_notes ? `## Chef's Notes\n${recipe.chef_notes}` : ''}
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
+    if (!canShare) return;
+
+    // TS lib types don't always model platform support accurately; this is runtime-safe.
+    const share = (navigator as Navigator & { share?: (data: ShareData) => Promise<void> }).share;
+    if (typeof share !== 'function') return;
+
+    try {
+      await share({
           title: recipe.title,
           text: recipe.description || 'Check out this recipe!',
           url: recipeUrl,
-        });
-      } catch (err) {
-        console.log('Share cancelled');
-      }
+      });
+    } catch {
+      // User cancelled or share failed.
     }
   };
 
@@ -115,7 +138,7 @@ ${recipe.chef_notes ? `## Chef's Notes\n${recipe.chef_notes}` : ''}
             <span>Download as Markdown</span>
           </button>
 
-          {navigator.share && (
+          {canShare && (
             <button
               onClick={handleShare}
               className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center space-x-2"
