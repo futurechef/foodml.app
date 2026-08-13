@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>FoodML — The White-Label Kitchen OS</title>
+<meta name="description" content="FoodML is the white-label kitchen operating system behind Mise: AI menus, supply chain, food safety, and events — deployed under your brand, for your venues." />
+<meta property="og:title" content="FoodML — The White-Label Kitchen OS" />
+<meta property="og:description" content="One platform. Your brand. AI menu planning, inventory & ordering, safety logs, and event orders — proven in production at enterprise dining." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://foodml.app/" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root {
+    --ink: #262a24;
+    --ink-soft: #5c6157;
+    --ink-faint: #8a9082;
+    --paper: #faf8f3;
+    --paper-2: #f2efe6;
+    --card: #ffffff;
+    --line: #e4e0d3;
+    --sage: #7d9070;
+    --sage-deep: #55684a;
+    --sage-soft: #e6ecdf;
+    --clay: #cc785c;
+    --clay-soft: #f2dace;
+    --night: #232720;
+    --night-2: #2d322a;
+    --night-line: #3d4438;
+    --night-ink: #eceee6;
+    --night-faint: #a8ae9e;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  a { color: var(--sage-deep); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 248, 243, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-in { display: flex; align-items: center; gap: 28px; height: 64px; }
+  .logo { font-family: var(--serif); font-size: 22px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+  .logo .dot { width: 11px; height: 11px; border-radius: 999px; background: var(--sage); box-shadow: 0 0 0 3px var(--sage-soft); }
+  .nav-links { display: flex; gap: 22px; margin-left: auto; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 14.5px; font-weight: 500; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px;
+    padding: 11px 22px; border-radius: 10px; border: 1px solid transparent;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--sage-deep); color: #fff; box-shadow: 0 1px 2px rgba(38,42,36,.18); }
+  .btn-primary:hover { background: #48593e; }
+  .btn-ghost { border-color: var(--line); color: var(--ink); background: var(--card); }
+  .btn-ghost:hover { border-color: var(--sage); }
+  .nav .btn { padding: 8px 16px; font-size: 14px; }
+  @media (max-width: 760px) { .nav-links a:not(.btn) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 88px 0 72px; background:
+    radial-gradient(900px 420px at 85% -10%, var(--sage-soft) 0%, transparent 60%),
+    radial-gradient(700px 360px at 0% 110%, var(--clay-soft) 0%, transparent 55%); }
+  .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage-deep); background: var(--sage-soft); border: 1px solid #d5dfc9; padding: 6px 14px; border-radius: 999px; margin-bottom: 22px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(38px, 6vw, 62px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 700; max-width: 15em; }
+  .hero h1 em { font-style: italic; color: var(--sage-deep); }
+  .hero p.lede { margin-top: 22px; font-size: clamp(17px, 2.2vw, 20px); color: var(--ink-soft); max-width: 38em; }
+  .hero-ctas { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-note { margin-top: 14px; font-size: 13.5px; color: var(--ink-faint); }
+
+  /* ---------- Proof strip ---------- */
+  .proof { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--card); }
+  .proof-in { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .proof-cell { padding: 26px 18px; text-align: center; border-left: 1px solid var(--line); }
+  .proof-cell:first-child { border-left: none; }
+  .proof-num { font-family: var(--serif); font-size: 30px; font-weight: 700; color: var(--ink); }
+  .proof-label { font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+  @media (max-width: 760px) {
+    .proof-in { grid-template-columns: repeat(2, 1fr); }
+    .proof-cell:nth-child(3) { border-left: none; }
+    .proof-cell { border-top: 1px solid var(--line); }
+    .proof-cell:nth-child(-n+2) { border-top: none; }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 84px 0; }
+  .sec-kicker { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay); margin-bottom: 12px; }
+  h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: -0.015em; font-weight: 700; max-width: 20em; }
+  .sec-lede { margin-top: 14px; color: var(--ink-soft); font-size: 17px; max-width: 42em; }
+
+  /* ---------- Deployments ---------- */
+  .deploys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+  .deploy { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .deploy .tag { font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; display: inline-block; margin-bottom: 12px; }
+  .tag-live { background: var(--sage-soft); color: var(--sage-deep); }
+  .tag-open { background: var(--clay-soft); color: #a05a41; }
+  .deploy h3 { font-size: 17px; font-weight: 700; }
+  .deploy p { font-size: 14px; color: var(--ink-soft); margin-top: 6px; }
+  @media (max-width: 900px) { .deploys { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .deploys { grid-template-columns: 1fr; } }
+
+  /* ---------- Modules ---------- */
+  .modules-sec { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .modules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .module { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 26px; display: flex; flex-direction: column; gap: 10px; }
+  .module .glyph { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 21px; background: var(--sage-soft); }
+  .module h3 { font-size: 18px; font-weight: 700; }
+  .module p { font-size: 14.5px; color: var(--ink-soft); }
+  .module ul { list-style: none; margin-top: 4px; }
+  .module li { font-size: 13.5px; color: var(--ink-soft); padding: 4px 0 4px 22px; position: relative; }
+  .module li::before { content: "✓"; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
+  @media (max-width: 900px) { .modules { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .modules { grid-template-columns: 1fr; } }
+
+  /* ---------- White label ---------- */
+  .wl-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: start; margin-top: 44px; }
+  @media (max-width: 860px) { .wl-grid { grid-template-columns: 1fr; } }
+  .wl-points { display: flex; flex-direction: column; gap: 20px; }
+  .wl-point { display: flex; gap: 16px; }
+  .wl-point .n { flex: none; width: 34px; height: 34px; border-radius: 999px; background: var(--sage-deep); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+  .wl-point h3 { font-size: 16.5px; font-weight: 700; }
+  .wl-point p { font-size: 14.5px; color: var(--ink-soft); margin-top: 3px; }
+  .console {
+    background: var(--night); color: var(--night-ink); border-radius: 16px;
+    border: 1px solid var(--night-line); overflow: hidden; font-family: var(--mono);
+    font-size: 13px; line-height: 1.75; box-shadow: 0 18px 44px -18px rgba(38,42,36,.45);
+  }
+  .console-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; background: var(--night-2); border-bottom: 1px solid var(--night-line); }
+  .console-bar i { width: 11px; height: 11px; border-radius: 999px; background: var(--night-line); }
+  .console-bar span { margin-left: 8px; font-size: 12px; color: var(--night-faint); font-family: var(--sans); }
+  .console pre { padding: 20px 22px; overflow-x: auto; }
+  .c-comment { color: var(--night-faint); }
+  .c-key { color: #a9c69a; }
+  .c-val { color: #e8c9a0; }
+
+  /* ---------- Safety ---------- */
+  .safety-sec { background: var(--night); color: var(--night-ink); }
+  .safety-sec .sec-kicker { color: #d9a58e; }
+  .safety-sec h2 { color: #fff; }
+  .safety-sec .sec-lede { color: var(--night-faint); }
+  .safety-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .safety-card { background: var(--night-2); border: 1px solid var(--night-line); border-radius: 16px; padding: 26px; }
+  .safety-card h3 { font-size: 17px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+  .safety-card p { font-size: 14.5px; color: var(--night-faint); margin-top: 10px; }
+  .safety-card .mini { margin-top: 14px; font-size: 12.5px; font-family: var(--mono); color: #a9c69a; background: rgba(0,0,0,.25); border: 1px solid var(--night-line); border-radius: 8px; padding: 8px 12px; overflow-x: auto; white-space: nowrap; }
+  @media (max-width: 860px) { .safety-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Ops table ---------- */
+  .ops { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 40px; margin-top: 40px; }
+  .op { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .op .glyph { flex: none; font-size: 19px; }
+  .op h3 { font-size: 15.5px; font-weight: 700; }
+  .op p { font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
+  @media (max-width: 760px) { .ops { grid-template-columns: 1fr; } }
+
+  /* ---------- Engagement ---------- */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
+  .plan { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px 28px; display: flex; flex-direction: column; }
+  .plan.feature { border-color: var(--sage); box-shadow: 0 12px 34px -16px rgba(85,104,74,.35); position: relative; }
+  .plan.feature::before { content: "Most common"; position: absolute; top: -12px; left: 24px; background: var(--sage-deep); color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+  .plan h3 { font-family: var(--serif); font-size: 23px; font-weight: 700; }
+  .plan .for { font-size: 13.5px; color: var(--ink-faint); margin-top: 4px; }
+  .plan ul { list-style: none; margin: 18px 0 24px; flex: 1; }
+  .plan li { font-size: 14px; color: var(--ink-soft); padding: 5px 0 5px 24px; position: relative; }
+  .plan li::before { content: "→"; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
+  @media (max-width: 860px) { .plans { grid-template-columns: 1fr; } .plan.feature::before { top: -11px; } }
+
+  /* ---------- CTA ---------- */
+  .cta { background: var(--sage-deep); color: #fff; border-radius: 22px; padding: clamp(36px, 6vw, 64px); text-align: center; }
+  .cta h2 { color: #fff; margin: 0 auto; }
+  .cta p { margin: 14px auto 0; max-width: 34em; color: #dbe3d2; font-size: 16.5px; }
+  .cta .btn { margin-top: 28px; background: #fff; color: var(--sage-deep); font-size: 16px; padding: 14px 30px; }
+  .cta .btn:hover { background: var(--paper); }
+
+  /* ---------- Footer ---------- */
+  footer { padding: 44px 0 60px; color: var(--ink-faint); font-size: 13.5px; }
+  .foot-in { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+  footer a { color: var(--ink-soft); text-decoration: none; margin-left: 18px; }
+  footer a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span class="dot"></span>FoodML</a>
+    <nav class="nav-links">
+      <a href="#platform">Platform</a>
+      <a href="#white-label">White label</a>
+      <a href="#safety">Safety</a>
+      <a href="#enterprise">Enterprise</a>
+      <a class="btn btn-primary" href="#contact">Book a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="wrap">
+      <span class="kicker">Enterprise · White label</span>
+      <h1>The kitchen operating system,<br /><em>under your brand.</em></h1>
+      <p class="lede">
+        FoodML is the platform behind <strong>Mise</strong> — the AI-native kitchen OS running
+        enterprise dining in production today. Menus, recipes, inventory, ordering, receiving,
+        safety logs, and event orders in one system. We deploy it white-labeled for your
+        organization: your name, your venues, your rules.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Book a demo</a>
+        <a class="btn btn-ghost" href="#platform">Explore the platform</a>
+      </div>
+      <p class="hero-note">Proven in production with Restaurant Associates at Shopify, NYC &amp; Toronto.</p>
+    </div>
+  </div>
+
+  <!-- Proof strip -->
+  <div class="proof">
+    <div class="wrap proof-in">
+      <div class="proof-cell"><div class="proof-num">29,930</div><div class="proof-label">catalog items across 7 real vendors</div></div>
+      <div class="proof-cell"><div class="proof-num">4</div><div class="proof-label">branded deployments from one platform</div></div>
+      <div class="proof-cell"><div class="proof-num">6</div><div class="proof-label">integrated modules, one login</div></div>
+      <div class="proof-cell"><div class="proof-num">Days</div><div class="proof-label">from contract to a branded instance</div></div>
+    </div>
+  </div>
+
+  <!-- Deployments -->
+  <section id="deployments">
+    <div class="wrap">
+      <div class="sec-kicker">In production</div>
+      <h2>One platform. Four live brands. Zero forks.</h2>
+      <p class="sec-lede">
+        Every FoodML deployment runs the same continuously-improved core. Your instance is a
+        first-class citizen — every platform upgrade ships to every brand.
+      </p>
+      <div class="deploys">
+        <div class="deploy">
+          <span class="tag tag-live">Enterprise</span>
+          <h3>MiseOS · Shopify NYC</h3>
+          <p>Full kitchen OS for Restaurant Associates — corporate dining at scale, themed to the client's design system.</p>
+        </div>
+        <div class="deploy">
+          <span class="tag tag-live">Enterprise</span>
+          <h3>MiseOS · Shopify Toronto</h3>
+          <p>Second venue, fully isolated instance — its own data, its own allergen policy, same brand system.</p>
+        </div>
+        <div class="deploy">
+          <span class="tag tag-live">Showcase</span>
+          <h3>FoodML Mise</h3>
+          <p>The flagship demo instance — where new capabilities land first and are proven before rollout.</p>
+        </div>
+        <div class="deploy">
+          <span class="tag tag-open">Consumer</span>
+          <h3>Forkhub</h3>
+          <p>Open AI recipe-maker — the same engine in a public, rate-limited, mobile-first single screen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform modules -->
+  <section class="modules-sec" id="platform">
+    <div class="wrap">
+      <div class="sec-kicker">The platform</div>
+      <h2>Everything a kitchen runs on, in one system.</h2>
+      <p class="sec-lede">
+        Six modules that share one database, one login, and one design system — so the menu you
+        plan is the menu you order for, label, log, and serve.
+      </p>
+      <div class="modules">
+        <div class="module">
+          <div class="glyph">🤖</div>
+          <h3>AutoMenu Agent</h3>
+          <p>A real autonomous menu-planning agent — not a chat wrapper. It reads your live recipes, calendar, and production logs, reasons across steps, and drafts the plan.</p>
+          <ul>
+            <li>Propose-then-apply: chef approves every write</li>
+            <li>Grounded in your recipe corpus &amp; history</li>
+            <li>Allergen policy enforced at the search boundary</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="glyph">📦</div>
+          <h3>Supply</h3>
+          <p>The complete inventory → order → receiving loop, built to spec with enterprise dining operators.</p>
+          <ul>
+            <li>Par-driven order builder with vendor CSV + email export</li>
+            <li>Receiving with short/over/missing reconciliation</li>
+            <li>Offline-first mobile counts that sync on reconnect</li>
+            <li>Real multi-vendor catalogs, spend tracking &amp; order guides</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="glyph">📖</div>
+          <h3>Recipes &amp; Menus</h3>
+          <p>AI recipe cards with house-style hero photography, print-ready output, and a rotation-week menu calendar.</p>
+          <ul>
+            <li>AI completion + on-demand hero images</li>
+            <li>Print, PDF, and multi-recipe booklet output</li>
+            <li>Daily / weekly / monthly calendar views</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="glyph">🌡️</div>
+          <h3>Safety Logs</h3>
+          <p>Digital HACCP-style logs your team actually fills in — with an inspector view for the moment it matters.</p>
+          <ul>
+            <li>Cold / hot holding &amp; receiving temps, °C or °F</li>
+            <li>Thresholds enforced at entry, canonical storage</li>
+            <li>Production logs tied to the menu calendar</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="glyph">🪧</div>
+          <h3>Signage &amp; Guest Portals</h3>
+          <p>Front-of-house output generated from back-of-house truth — no retyping, no stale menus.</p>
+          <ul>
+            <li>Dish labels &amp; salad-bar planograms, print-ready</li>
+            <li>Kiosk / web guest menu bound live to the calendar</li>
+            <li>“What can I eat?” dietary filtering for guests</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="glyph">📋</div>
+          <h3>Events (BEO)</h3>
+          <p>Banquet event orders drafted by AI from a brief, refined by your team, and saved to the shared calendar.</p>
+          <ul>
+            <li>AI event drafting grounded in your library</li>
+            <li>Print-ready BEO sheets</li>
+            <li>Events surface in the menu calendar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- White label -->
+  <section id="white-label">
+    <div class="wrap">
+      <div class="sec-kicker">White label</div>
+      <h2>Your brand isn’t a paint job. It’s configuration.</h2>
+      <p class="sec-lede">
+        FoodML was architected multi-brand from day one: a single production image, switched
+        entirely at runtime. That’s why a new branded instance takes days, not a rebuild —
+        and why it never drifts from the core product.
+      </p>
+      <div class="wl-grid">
+        <div class="wl-points">
+          <div class="wl-point">
+            <div class="n">1</div>
+            <div>
+              <h3>Your identity, everywhere</h3>
+              <p>App name, theme, typography, and venue names flow through every screen, print sheet, PDF, and guest portal — including a full client design-system theme when you have one.</p>
+            </div>
+          </div>
+          <div class="wl-point">
+            <div class="n">2</div>
+            <div>
+              <h3>Your rules, enforced</h3>
+              <p>Site allergen policy, live locations, admin allowlists, and role capabilities are per-instance configuration — enforced by the backend, not just hidden in the UI.</p>
+            </div>
+          </div>
+          <div class="wl-point">
+            <div class="n">3</div>
+            <div>
+              <h3>Your data, isolated</h3>
+              <p>Each venue is structurally scoped, and instances can run fully isolated data stores. Your catalog, your counts, your history — never mingled with anyone else’s.</p>
+            </div>
+          </div>
+          <div class="wl-point">
+            <div class="n">4</div>
+            <div>
+              <h3>Your domain, your door</h3>
+              <p>Clean custom domains with single-sign-on via Google, allowlist-gated. Public guest portals stay open; everything operational stays authenticated.</p>
+            </div>
+          </div>
+        </div>
+        <div class="console" aria-label="Example instance configuration">
+          <div class="console-bar"><i></i><i></i><i></i><span>your-brand · instance config</span></div>
+          <pre><span class="c-comment"># One image. Your instance is runtime config:</span>
+<span class="c-key">APP_NAME</span>=<span class="c-val">YourBrandOS</span>
+<span class="c-key">VENUE_NAME</span>=<span class="c-val">"Your HQ Café"</span>
+<span class="c-key">LIVE_LOCATIONS</span>=<span class="c-val">hq,campus-2</span>
+<span class="c-key">SITE_BANNED_ALLERGENS</span>=<span class="c-val">peanut,treenut,shellfish</span>
+<span class="c-key">ADMIN_EMAILS</span>=<span class="c-val">ops@yourbrand.com</span>
+
+<span class="c-comment"># Fail-closed by design: a missing policy</span>
+<span class="c-comment"># falls back to the strictest rule — never</span>
+<span class="c-comment"># to "allow everything."</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety -->
+  <section class="safety-sec" id="safety">
+    <div class="wrap">
+      <div class="sec-kicker">Food safety, taken seriously</div>
+      <h2>AI in the kitchen needs guardrails. Ours are structural.</h2>
+      <p class="sec-lede">
+        Most AI food tools generate text and hope. FoodML treats allergen policy as a hard
+        constraint and treats AI writes as proposals — because a menu system that can quietly
+        serve the wrong dish is worse than no system at all.
+      </p>
+      <div class="safety-grid">
+        <div class="safety-card">
+          <h3>🚫 Hard allergen constraints</h3>
+          <p>Banned allergens are enforced at four gates — readiness checks, recipe search, and both AI write paths — so the agent never even <em>sees</em> a non-compliant dish. One policy, read by frontend and backend alike, so the gates can’t drift apart.</p>
+          <div class="mini">policy: fail-closed · gates: 4 · drift: impossible</div>
+        </div>
+        <div class="safety-card">
+          <h3>🧪 Second-line screening</h3>
+          <p>Declared allergens aren’t trusted blindly. An independent ingredient-text screener — backed by a 48-test guard suite — re-checks everything AI-generated, catching under-declared dishes before they reach a menu.</p>
+          <div class="mini">screen_allergens · selftest: 48 guards</div>
+        </div>
+        <div class="safety-card">
+          <h3>✋ Propose, then apply</h3>
+          <p>The AutoMenu agent reads live data freely but stages every write as a proposed action. A chef reviews and applies — and applied actions go through the same capability-gated paths as a human user. No silent AI writes, ever.</p>
+          <div class="mini">reads: live · writes: staged → chef-approved</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise ops -->
+  <section id="enterprise">
+    <div class="wrap">
+      <div class="sec-kicker">Enterprise-ready</div>
+      <h2>Built like infrastructure, because it is.</h2>
+      <p class="sec-lede">
+        Your kitchen opens at 6 a.m. whether the software is ready or not. FoodML runs on
+        Google Cloud with the operational posture of a system people depend on every shift.
+      </p>
+      <div class="ops">
+        <div class="op"><div class="glyph">🔐</div><div><h3>Verified identity on every request</h3><p>Google sign-in with server-side token verification and enforced email verification. Unknown accounts are denied by default.</p></div></div>
+        <div class="op"><div class="glyph">🧑‍🍳</div><div><h3>Role &amp; capability access control</h3><p>Admin, chef, counter, and viewer roles with fine-grained capabilities — reads open to your team, writes gated per function.</p></div></div>
+        <div class="op"><div class="glyph">💾</div><div><h3>Point-in-time recovery + daily backups</h3><p>7-day PITR and scheduled backups on the production database. A bad day is recoverable to the minute.</p></div></div>
+        <div class="op"><div class="glyph">⚡</div><div><h3>Warm at shift-start</h3><p>Always-on minimum instances mean no cold starts when the morning crew logs in. Serverless scale when catering season hits.</p></div></div>
+        <div class="op"><div class="glyph">📴</div><div><h3>Offline-first where it counts</h3><p>Inventory counts queue locally in the walk-in and sync when signal returns — idempotent by design, with per-person attribution.</p></div></div>
+        <div class="op"><div class="glyph">🗝️</div><div><h3>Secrets managed, keys rotatable</h3><p>API credentials live in a managed secret store with constant-time verification, instant rotation, and a kill switch.</p></div></div>
+        <div class="op"><div class="glyph">🔌</div><div><h3>Automation &amp; integration path</h3><p>A scriptable CLI/API surface for cron jobs, data loads, and integrations — vendor catalogs load additively at real-world scale.</p></div></div>
+        <div class="op"><div class="glyph">📱</div><div><h3>Installable PWA, no app store</h3><p>Add-to-home-screen on any device, touch-sized inputs, print-perfect documents. Zero MDM friction.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement -->
+  <section>
+    <div class="wrap">
+      <div class="sec-kicker">How we work</div>
+      <h2>From first call to first service.</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Pilot</h3>
+          <div class="for">One venue · 30–60 days</div>
+          <ul>
+            <li>Branded instance stood up in days</li>
+            <li>Your vendor catalog &amp; order guide loaded</li>
+            <li>Your allergen policy configured &amp; verified</li>
+            <li>Team onboarded on devices they already carry</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Start a pilot</a>
+        </div>
+        <div class="plan feature">
+          <h3>Rollout</h3>
+          <div class="for">Multi-venue operators</div>
+          <ul>
+            <li>Everything in Pilot, per venue</li>
+            <li>Per-venue policies, catalogs &amp; access</li>
+            <li>Client design-system theming</li>
+            <li>Isolated data instances per client</li>
+            <li>Priority support through go-live</li>
+          </ul>
+          <a class="btn btn-primary" href="#contact">Plan a rollout</a>
+        </div>
+        <div class="plan">
+          <h3>Platform</h3>
+          <div class="for">Hospitality groups &amp; partners</div>
+          <ul>
+            <li>White-label the platform for your clients</li>
+            <li>Custom modules &amp; integrations</li>
+            <li>Automation/CLI access for your systems</li>
+            <li>Roadmap partnership</li>
+          </ul>
+          <a class="btn btn-ghost" href="#contact">Talk partnership</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="cta">
+        <h2>See your kitchen running on it.</h2>
+        <p>We’ll walk you through the live product, then stand up a branded instance with your
+          venue, your catalog, and your policies — so your team evaluates the real thing.</p>
+        <a class="btn" href="mailto:cyborgchef.io@gmail.com?subject=FoodML%20enterprise%20demo">Book a demo →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 FoodML · The white-label kitchen OS</div>
+    <div>
+      <a href="#platform">Platform</a>
+      <a href="#white-label">White label</a>
+      <a href="#enterprise">Enterprise</a>
+      <a href="mailto:cyborgchef.io@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
